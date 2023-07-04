@@ -1,0 +1,25 @@
+.btn-primary{
+    position: absolute;
+    margin-left: 10px;
+    width: 70px;
+    font-weight: 900 !important;
+    --bs-btn-color:  white !important;
+    --bs-btn-bg: black !important;
+    --bs-btn-border-color: black !important;
+
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: rgb(53, 53, 53) !important;
+    --bs-btn-hover-border-color:rgb(53, 53, 53) !important;
+   
+    --bs-btn-active-bg: rgb(53, 53, 53) !important;
+    --bs-btn-active-border-color: rgb(53, 53, 53) !important;
+
+    --bs-btn-disabled-bg: rgb(53, 53, 53) !important;
+    --bs-btn-disabled-border-color: rgb(53, 53, 53) !important;
+    border-radius: 100% !important;
+}
+.modal-input{
+    background-color: rgb(243, 243, 243) !important;
+    border: none;
+    border-radius: 10px;
+}
