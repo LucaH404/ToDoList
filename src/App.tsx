@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Task } from './components/Task/taskType';
+import CreateBtn from './components/CreateBtn/CreateBtn';
+import TaskCard from './components/Task/TaskCard';
 import './App.css';
+const App = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-function App() {
+  const handleTaskSubmit = (newTask: Task) => {
+    setTasks(prevTasks => [...prevTasks, newTask]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App w-100'>
+      <div className='container'>
+      <CreateBtn onTaskSubmit={handleTaskSubmit} />
+      <TaskCard tasks={tasks} /> 
+      </div>
     </div>
   );
 }
+
 
 export default App;
