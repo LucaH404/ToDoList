@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './taskCard.css'
 import { Task } from './taskType';
 //filtrare in base all'indice e cambiare il parametro all'interno dell'oggetto in sè
@@ -17,25 +17,31 @@ const TaskCard = ({ tasks }: TaskCardProps) => {
             return "red";
         } else return undefined
     };
-
-    console.log(visible)
-    const handleClick = (index: number) => {
+ 
+    const handleClick = useCallback((index: number) => {
         const updatedTasks = [...tasks];
         updatedTasks[index].isDone = true;
         setVisible(false);
-    };
+      }, [tasks]);
+
     useEffect(() => {
         if (visible === false) {
             setVisible(true)
         }
     }, [visible]);
+    
+    const todoCount = useMemo(() => {
+        return tasks.filter((task) => !task.isDone).length;
+      }, [tasks]);
 
-
+    const doneCount = useMemo(() => {
+        return tasks.filter((task) => task.isDone).length;
+    }, [tasks]);
 
     return (
         <div className='list-wrapper'>
             <div className='lists'>
-                <div className='h1'>To Do</div>
+                <div className='h1'>To Do ({todoCount})</div>
                 <div className='card-container'> 
                     
                     {tasks.map((task, index) => (task.isDone === false ?
@@ -63,7 +69,7 @@ const TaskCard = ({ tasks }: TaskCardProps) => {
                 </div>
             </div>
             <div className='lists'>
-                <div className='h1'>Done</div>
+                <div className='h1'>Done {doneCount}</div>
                 <div className='card-container'> 
                     { tasks.map((task, index) => (task.isDone !== false ?
                         <div key={index} className='card-wrapper mb-5 mt-5 d-flex flex-column'>

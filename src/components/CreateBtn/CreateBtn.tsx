@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Task } from './../Task/taskType';
 import './CreateBtn.css'
 
@@ -15,15 +15,15 @@ const CreateBtn = ({ onTaskSubmit }: CreateBtnProps) => {
    isDone: false
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setTaskData(prevData => ({
       ...prevData,
       [name]: value
     }));
-  };
+  }, [])
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     const newTask = {
       title: taskData.title,
       description: taskData.description,
@@ -41,7 +41,7 @@ const CreateBtn = ({ onTaskSubmit }: CreateBtnProps) => {
       priority: '',
      isDone: false
     });
-  };
+  }, [onTaskSubmit, taskData.author, taskData.description, taskData.isDone, taskData.priority, taskData.title]);
 
   return (
     <div>
