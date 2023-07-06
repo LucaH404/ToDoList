@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Task } from './components/Task/taskType';
 import CreateBtn from './components/CreateBtn/CreateBtn';
 import TaskCard from './components/Task/TaskCard';
@@ -9,7 +9,7 @@ const App = () => {
   const handleTaskSubmit = (newTask: Task) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
   };
-
+  
   return (
     <div className='App w-100'>
       <div className='container'>
