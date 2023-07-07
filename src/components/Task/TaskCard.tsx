@@ -4,10 +4,11 @@ import { Task } from "./taskType";
 //filtrare in base all'indice e cambiare il parametro all'interno dell'oggetto in sè
 interface TaskCardProps {
   tasks: Task[];
-//   todocount: number;
+  todocount: number;
+  donecount:any;
 }
 
-const TaskCard = ({ tasks }: TaskCardProps) => {
+const TaskCard = ({ tasks, todocount, donecount}: TaskCardProps) => {
   const [visible, setVisible] = useState(true);
 
   const changeColor = (priority: string): string | undefined => {
@@ -32,20 +33,20 @@ const TaskCard = ({ tasks }: TaskCardProps) => {
     }
   }, [visible]);
 
-  const todoCount = useMemo(() => {
-    return tasks.filter((task) => !task.isDone).length;
-  }, [tasks, visible]);
+//   const todoCount = useMemo(() => {
+//     return tasks.filter((task) => !task.isDone).length;
+//   }, [tasks, visible]);
 
-  const doneCount = useMemo(() => {
-    return tasks.filter((task) => task.isDone).length;
-  }, [tasks, todoCount]);
+//   const doneCount = useMemo(() => {
+//     return tasks.filter((task) => task.isDone).length;
+//   }, [tasks, todoCount]);
 
   return (
     <div>
-  <div className="h1">Tasks to complete: {doneCount}/{tasks.length}</div>
+  <div className="h1">Tasks to complete: {donecount}/{tasks.length}</div>
     <div className="list-wrapper">
       <div className="lists"> 
-        <div className="h1">To Do ({todoCount})</div>
+        <div className="h1">To Do ({todocount})</div>
         <div className="card-container">
           {tasks.map((task, index) =>
             task.isDone === false ? (
@@ -85,7 +86,7 @@ const TaskCard = ({ tasks }: TaskCardProps) => {
         </div>
       </div>
       <div className="lists">
-        <div className="h1">Done ({doneCount})</div>
+        <div className="h1">Done ({donecount})</div>
         <div className="card-container">
           {tasks.map((task, index) =>
             task.isDone !== false ? (
