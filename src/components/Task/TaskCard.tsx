@@ -32,12 +32,12 @@ const TaskCard = ({ tasks }: TaskCardProps) => {
 
 
   const toCompleteCount = useMemo(() => {
-    return ("Tasks to complete " + updatedTasks.filter((task) => !task.isDone).length);
+    return (`Tasks to complete ${updatedTasks.filter((task) => !task.isDone).length}/${tasks.length}`);
   }, [updatedTasks]);
 
   return (
     <div>
-  <div className="h1">{toCompleteCount}/{tasks.length}</div>
+  <div className="h1">{toCompleteCount}</div>
     <div className="list-wrapper">
       <div className="lists"> 
         <div className="h1">To Do</div>
