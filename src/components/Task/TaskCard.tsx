@@ -4,13 +4,11 @@ import { Task } from "./taskType";
 //filtrare in base all'indice e cambiare il parametro all'interno dell'oggetto in sè
 interface TaskCardProps {
   tasks: Task[];
-  todocount: number;
-  donecount:any;
 }
 
-const TaskCard = ({ tasks, todocount, donecount}: TaskCardProps) => {
+const TaskCard = ({ tasks }: TaskCardProps) => {
   const [visible, setVisible] = useState(true);
-
+  const updatedTasks = [...tasks];
   const changeColor = (priority: string): string | undefined => {
     if (priority === "Medium") {
       return "yellow";
@@ -21,7 +19,6 @@ const TaskCard = ({ tasks, todocount, donecount}: TaskCardProps) => {
 
   const handleClick = useCallback(
     (index: number) => {
-      const updatedTasks = [...tasks];
       updatedTasks[index].isDone = true;
       setVisible(false);
     },
@@ -33,20 +30,17 @@ const TaskCard = ({ tasks, todocount, donecount}: TaskCardProps) => {
     }
   }, [visible]);
 
-//   const todoCount = useMemo(() => {
-//     return tasks.filter((task) => !task.isDone).length;
-//   }, [tasks, visible]);
 
-//   const doneCount = useMemo(() => {
-//     return tasks.filter((task) => task.isDone).length;
-//   }, [tasks, todoCount]);
+  const toCompleteCount = useMemo(() => {
+    return ("Tasks to complete " + updatedTasks.filter((task) => !task.isDone).length);
+  }, [updatedTasks]);
 
   return (
     <div>
-  <div className="h1">Tasks to complete: {donecount}/{tasks.length}</div>
+  <div className="h1">{toCompleteCount}/{tasks.length}</div>
     <div className="list-wrapper">
       <div className="lists"> 
-        <div className="h1">To Do ({todocount})</div>
+        <div className="h1">To Do</div>
         <div className="card-container">
           {tasks.map((task, index) =>
             task.isDone === false ? (
@@ -86,7 +80,7 @@ const TaskCard = ({ tasks, todocount, donecount}: TaskCardProps) => {
         </div>
       </div>
       <div className="lists">
-        <div className="h1">Done ({donecount})</div>
+        <div className="h1">Done</div>
         <div className="card-container">
           {tasks.map((task, index) =>
             task.isDone !== false ? (

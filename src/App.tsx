@@ -4,15 +4,7 @@ import CreateBtn from './components/CreateBtn/CreateBtn';
 import TaskCard from './components/Task/TaskCard';
 import './App.css';
 const App = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  console.log(tasks)
- 
-  const todoCount = useMemo(() => {
-    return tasks.filter((task) => !task.isDone).length;
-  }, [tasks]);
-  const doneCount = useMemo(() => {
-    return tasks.filter((task) => task.isDone).length;
-  }, [tasks, todoCount]);
+  const [tasks, setTasks] = useState<Task[]>([]); 
 
   const handleTaskSubmit = (newTask: Task) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
@@ -22,7 +14,7 @@ const App = () => {
     <div className='App w-100'>
       <div className='container'>
       <CreateBtn onTaskSubmit={handleTaskSubmit} />
-      <TaskCard tasks={tasks} todocount={todoCount} donecount={doneCount} /> 
+      <TaskCard tasks={tasks} /> 
       </div>
     </div>
   );
